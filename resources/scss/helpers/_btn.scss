@@ -1,0 +1,17 @@
+a.btn{
+    display: inline-flex;
+    text-decoration: none;
+    background: $white;
+    color: $black;
+    align-items: center;
+    justify-content: center;
+    transition: .3s ease-in-out;
+    border-radius: .4rem;
+    span{
+        vertical-align: center;
+    }
+    &:hover, &.active{
+        background: $blue;
+        color: $white;
+    }
+}

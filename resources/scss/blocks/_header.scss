@@ -1,0 +1,92 @@
+header.page-header {
+    background: $white;
+
+    div.container {
+
+        min-height: 6rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        div.left {
+            display: flex;
+            align-items: center;
+            flex: 1;
+
+            a.menu {
+                display: flex;
+                flex-direction: column;
+                margin-right: 7%;
+
+                span {
+                    display: block;
+                    background: $black;
+                    width: 1.9rem;
+                    height: .3rem;
+                    margin: .3rem;
+                    border-radius: 25%;
+
+                    &:last-child {
+                        width: 2.5rem;
+                    }
+                }
+            }
+
+            div.info {
+                span {
+                    padding: .5rem 1.5rem;
+                    border-radius: .5rem;
+                    background: $gray;
+                    color: $grayText;
+                    margin-right: .5rem;
+                }
+
+                span.project-name {
+                    background: #FFED4B;
+                    color: #94881E;
+                    font-weight: 800;
+                }
+            }
+        }
+
+        div.right {
+            display: flex;
+            align-items: center;
+
+            a.bell {
+                display: block;
+                position: relative;
+                background: url("../i/bell.svg") center center / contain no-repeat;
+                height: 2rem;
+                width: 2rem;
+                margin-right: 5rem;
+
+                &:after {
+                    position: absolute;
+                    top: -20%;
+                    right: -20%;
+                    content: '';
+                    height: 40%;
+                    width: 40%;
+                    border-radius: 100%;
+                    background: $blue;
+                    display: none;
+                }
+
+                &.notification {
+                    &:after {
+                        display: block;
+                    }
+                }
+            }
+
+            a.profile{
+                display: block;
+                position: relative;
+                background: url("../i/profile.svg") center center / contain no-repeat;
+                height: 3rem;
+                width: 3rem;
+            }
+        }
+    }
+}
