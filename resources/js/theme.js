@@ -6,11 +6,25 @@ $(document).ready(() => {
 
     let chart = document.querySelector('.chart')
 
+    let margin = 70
+
+    let head = 3000
+
+    let width = $(window).width()
+
+    console.log(width)
+
+    if (width <= 1400)
+        margin = 55
+
+    if (width <= 1200)
+        margin = 45
+
     let changeSize = (canvas, chart) => {
-        if (canvas.width  < chart.offsetWidth)
-            canvas.width  = chart.offsetWidth
+        if (canvas.width < chart.offsetWidth)
+            canvas.width = chart.offsetWidth + 30
         if (canvas.height < chart.offsetHeight)
-            canvas.height = chart.offsetHeight
+            canvas.height = $('.line:not(:first-child)').height()
     }
 
     let canvas = document.querySelector('canvas')
@@ -19,24 +33,21 @@ $(document).ready(() => {
 
     let points = $('.point')
 
-    let margin = 70
+    let takePosition = (points) => {
+        points.each(function (index) {
 
-    let takePosition = (points) =>
-    {
-        points.each(function(index){
-
-            position = Math.floor($(this).attr('data-point')) / 10
+            position = (head - Math.floor($(this).attr('data-point'))) / 200
 
             $(this).css({
                 left: index * margin,
             })
 
-            $(this).next().css({
+            $(this).prev().css({
                 left: index * margin,
             })
 
             $(this).children().css({
-                top: position+'px'
+                top: position + 'rem'
             })
         })
 
@@ -46,14 +57,10 @@ $(document).ready(() => {
 
     changeSize(canvas, chart)
 
-    $(window).on('resize',() => {
-        changeSize(canvas, chart)
-    })
-
     let draw = (canvas, points) => {
         let ctx = canvas.getContext('2d')
 
-        let gradient = ctx.createLinearGradient(0,125, 0,0)
+        let gradient = ctx.createLinearGradient(0, 150, 0, 0)
         gradient.addColorStop('0', '#6B9EFF')
         gradient.addColorStop('1.0', '#FF90C6')
 
@@ -61,8 +68,9 @@ $(document).ready(() => {
 
         ctx.beginPath()
 
-        points.each(function (index){
-            position = Math.floor($(this).attr('data-point')) / 10
+        points.each(function (index) {
+            position = (head - Math.floor($(this).attr('data-point'))) / 20
+
             if (index < 0)
                 ctx.moveTo(0, position)
             else
@@ -76,4 +84,9 @@ $(document).ready(() => {
 
     draw(canvas, points)
 
+    $(window).on('resize', () => {
+        changeSize(canvas, chart)
+        takePosition(points)
+        draw(canvas, points)
+    })
 })

@@ -386,6 +386,16 @@ h1, h2, h3 {
   margin: 0;
 }
 
+@media only screen and (max-width: 1599px) {
+  html {
+    font-size: 9px;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  html {
+    font-size: 8px;
+  }
+}
 a.btn {
   display: inline-flex;
   text-decoration: none;
@@ -567,6 +577,7 @@ section#statistic .tray .graphic {
   border-radius: 0.7rem;
   background: #fff;
   padding: 2rem;
+  position: relative;
 }
 section#statistic .tray .graphic header {
   display: flex;
@@ -593,12 +604,13 @@ section#statistic .tray .graphic header nav a.btn:hover, section#statistic .tray
 }
 section#statistic .tray .graphic .chart {
   min-height: 5rem;
+  max-width: calc(24 * 60rem);
   position: relative;
-  margin: 2rem auto 0;
+  width: 97%;
+  margin: 2rem 0 0 auto;
 }
 section#statistic .tray .graphic .chart canvas {
   position: relative;
-  width: 100%;
   height: 100%;
   background: transparent;
   z-index: 1;
@@ -606,7 +618,7 @@ section#statistic .tray .graphic .chart canvas {
 section#statistic .tray .graphic .chart div.line {
   left: 0;
   position: absolute;
-  height: 15rem;
+  height: 16rem;
   width: 0.1rem;
   background: #E8E8E8;
   z-index: 0;
@@ -620,14 +632,46 @@ section#statistic .tray .graphic .chart div.point {
 section#statistic .tray .graphic .chart div.point span {
   display: block;
   position: absolute;
-  top: 0;
   height: 1rem;
+  top: 0;
   width: 1rem;
   cursor: pointer;
   border-radius: 100%;
   background-color: #6B9EFF;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-40%) translateY(-50%);
   z-index: 2;
+}
+section#statistic .tray .graphic .chart-metrics {
+  padding-top: 4rem;
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+section#statistic .tray .graphic .chart-metrics li {
+  list-style: none;
+}
+section#statistic .tray .graphic .chart-metrics ul.times {
+  display: flex;
+  position: relative;
+  margin-left: 5.2rem;
+  padding-bottom: 1rem;
+  pointer-events: initial;
+}
+section#statistic .tray .graphic .chart-metrics ul.times li {
+  margin-right: 3.03rem;
+  display: block;
+}
+section#statistic .tray .graphic .chart-metrics ul.counts {
+  width: 5rem;
+}
+section#statistic .tray .graphic .chart-metrics ul.counts li {
+  margin-top: 1.5rem;
+  text-align: right;
 }
 
 /* Blocks */

@@ -33,3 +33,23 @@ main{
 h1, h2, h3{
     margin: 0;
 }
+
+@media only screen and (max-width: 1599px) {
+    html{
+        font-size: 9px;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    html{
+        font-size: 8px;
+    }
+}
+
+@mixin responsive {
+    @media only screen and (max-width: 1200px) {
+        @content;
+    }
+}
+
+

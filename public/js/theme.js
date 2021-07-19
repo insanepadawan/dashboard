@@ -1876,47 +1876,49 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 $(document).ready(function () {
   var chart = document.querySelector('.chart');
+  var margin = 70;
+  var head = 3000;
+  var width = $(window).width();
+  console.log(width);
+  if (width <= 1400) margin = 55;
+  if (width <= 1200) margin = 45;
 
   var changeSize = function changeSize(canvas, chart) {
-    if (canvas.width < chart.offsetWidth) canvas.width = chart.offsetWidth;
-    if (canvas.height < chart.offsetHeight) canvas.height = chart.offsetHeight;
+    if (canvas.width < chart.offsetWidth) canvas.width = chart.offsetWidth + 30;
+    if (canvas.height < chart.offsetHeight) canvas.height = $('.line:not(:first-child)').height();
   };
 
   var canvas = document.querySelector('canvas');
   var position = null;
   var points = $('.point');
-  var margin = 70;
 
   var takePosition = function takePosition(points) {
     points.each(function (index) {
-      position = Math.floor($(this).attr('data-point')) / 10;
+      position = (head - Math.floor($(this).attr('data-point'))) / 200;
       $(this).css({
         left: index * margin
       });
-      $(this).next().css({
+      $(this).prev().css({
         left: index * margin
       });
       $(this).children().css({
-        top: position + 'px'
+        top: position + 'rem'
       });
     });
   };
 
   takePosition(points);
   changeSize(canvas, chart);
-  $(window).on('resize', function () {
-    changeSize(canvas, chart);
-  });
 
   var draw = function draw(canvas, points) {
     var ctx = canvas.getContext('2d');
-    var gradient = ctx.createLinearGradient(0, 125, 0, 0);
+    var gradient = ctx.createLinearGradient(0, 150, 0, 0);
     gradient.addColorStop('0', '#6B9EFF');
     gradient.addColorStop('1.0', '#FF90C6');
     ctx.lineWidth = 3;
     ctx.beginPath();
     points.each(function (index) {
-      position = Math.floor($(this).attr('data-point')) / 10;
+      position = (head - Math.floor($(this).attr('data-point'))) / 20;
       if (index < 0) ctx.moveTo(0, position);else ctx.lineTo(index * margin, position);
     });
     ctx.strokeStyle = gradient;
@@ -1924,6 +1926,11 @@ $(document).ready(function () {
   };
 
   draw(canvas, points);
+  $(window).on('resize', function () {
+    changeSize(canvas, chart);
+    takePosition(points);
+    draw(canvas, points);
+  });
 });
 
 /***/ }),
